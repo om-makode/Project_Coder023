@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Templates & Code | Premium Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme Colors based on deep blue/tech aesthetic */
+            --bg-color: #050510;
+            --primary: #4361ee;
+            --accent: #4cc9f0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #b8b8b8;
+            --card-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- Dynamic Background --- */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1a237e 0%, #050510 70%);
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* --- Grid Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        /* --- Product Card (3D Tilt Wrapper) --- */
+        .card-wrap {
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 350px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.1s;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+        }
+
+        /* --- iPhone Mockup Styling --- */
+        .phone-mockup {
+            width: 200px; /* Phone Width */
+            height: 400px; /* Phone Height */
+            background: #000;
+            border-radius: 30px;
+            border: 8px solid #333; /* Bezel */
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            transform: translateZ(20px); /* 3D pop effect */
+        }
+
+        /* The Notch */
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 20px;
+            background: #333;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            z-index: 5;
+        }
+
+        /* User Image Area */
+        .phone-screen-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image fills the screen */
+            display: block;
+        }
+
+        /* --- Card Content --- */
+        .card-content {
+            transform: translateZ(30px); /* Text floats above card */
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bouncy zoom */
+            cursor: pointer;
+        }
+
+
+
+        /* THE ZOOM EFFECT */
+        .card:hover {
+            transform: scale(1.05); /* Zooms the card up by 5% */
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(76, 201, 240, 0.2);
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Buttons --- */
+        .view-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 201, 240, 0.6);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            margin-top: 2rem;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 1rem; }
+        }
+        
+        html {
+    scroll-behavior: smooth;
+}
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-container"></canvas>
+
+    <header>
+        <h1>iOS Craft Studio</h1>
+        <p class="subtitle">Premium SwiftUI Templates & Source Code. <br>Beautifully designed, ready to launch.</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card-wrap">
+            <div class="card">
+                <div class="phone-mockup">
+                    <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
+                </div>
+                
+                <div class="card-content">
+                    <div class="price-tag">$29.00</div>
+                    <h2>Fitness Tracker UI</h2>
+                    <p>A complete SwiftUI kit for health apps. Includes charts, profile views, and dark mode support.</p>
+                    <a href="https://payhip.com/YOUR_LINK_HERE" class="view-btn">View</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrap">
+            <div class="card">
+                <div class="phone-mockup">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
+                </div>
+                <div class="card-content">
+                    <div class="price-tag">$45.00</div>
+                    <h2>E-Commerce Pro</h2>
+                    <p>Full-featured shopping app template with cart logic, payment screens, and product grids.</p>
+                    <a href="#" class="view-btn">View</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrap">
+            <div class="card">
+                <div class="phone-mockup">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
+                </div>
+                <div class="card-content">
+                    <div class="price-tag">$19.00</div>
+                    <h2>Social Feed Kit</h2>
+                    <p>Instagram-style feed layout with stories, post interactions, and comment sections.</p>
+                    <a href="#" class="view-btn">View</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrap" id="fitness-card">
+            <div class="card">
+                <div class="phone-mockup">
+                    <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
+                </div>
+                
+                <div class="card-content">
+                    <div class="price-tag">$29.00</div>
+                    <h2>Fitness Tracker UI</h2>
+                    <p>A complete SwiftUI kit for health apps. Includes charts, profile views, and dark mode support.</p>
+                    <a href="./details.html" class="view-btn">View</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Coder023. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // // --- 1. 3D TILT EFFECT SCRIPT ---
+        // const cards = document.querySelectorAll('.card');
+
+        // cards.forEach(card => {
+        //     card.addEventListener('mousemove', (e) => {
+        //         const rect = card.getBoundingClientRect();
+        //         const x = e.clientX - rect.left;
+        //         const y = e.clientY - rect.top;
+                
+        //         const centerX = rect.width / 2;
+        //         const centerY = rect.height / 2;
+                
+        //         // const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
+        //         // const rotateY = ((x - centerX) / centerX) * 10;
+
+        //         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        //     });
+
+        //     card.addEventListener('mouseleave', () => {
+        //         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        //     });
+        // });
+
+        // --- 2. DYNAMIC PARTICLE BACKGROUND SCRIPT ---
+        const canvas = document.getElementById('canvas-container');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(76, 201, 240, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw connections
+            particles.forEach((p1, i) => {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+
+                    if (dist < 100) {
+                        ctx.strokeStyle = `rgba(67, 97, 238, ${1 - dist/100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            initParticles();
+        });
+
+        resize();
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>
