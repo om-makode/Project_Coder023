@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iOS Templates & Code | Premium Shop</title>
+    <title>Om Makode | iOS Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            /* Theme Colors based on deep blue/tech aesthetic */
             --bg-color: #050510;
             --primary: #4361ee;
             --accent: #4cc9f0;
@@ -18,13 +18,16 @@
             --glass-border: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
             --text-muted: #b8b8b8;
-            --card-width: 300px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -34,6 +37,11 @@
             overflow-x: hidden;
             min-height: 100vh;
         }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
 
         /* --- Dynamic Background --- */
         #canvas-container {
@@ -46,17 +54,39 @@
             background: radial-gradient(circle at 50% 50%, #1a237e 0%, #050510 70%);
         }
 
-        /* --- Header --- */
+        /* --- Section Styling --- */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Hero Header --- */
         header {
-            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             position: relative;
             z-index: 10;
-            margin-bottom: 3rem;
+            padding: 2rem;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -64,104 +94,161 @@
             animation: fadeInDown 1s ease-out;
         }
 
+        h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
         p.subtitle {
             color: var(--text-muted);
             font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
             animation: fadeIn 1.5s ease-out;
         }
 
-        /* --- Grid Layout --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
-            justify-content: center;
-        }
-
-        /* --- Product Card (3D Tilt Wrapper) --- */
-        .card-wrap {
-            perspective: 1000px;
+        /* --- Contact Links --- */
+        .social-links {
             display: flex;
+            gap: 1.5rem;
             justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.8s ease-out;
         }
 
-        .card {
-            width: 100%;
-            max-width: 350px;
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.1s;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform-style: preserve-3d;
-        }
-
-        /* --- iPhone Mockup Styling --- */
-        .phone-mockup {
-            width: 200px; /* Phone Width */
-            height: 400px; /* Phone Height */
-            background: #000;
             border-radius: 30px;
-            border: 8px solid #333; /* Bezel */
-            margin: 0 auto 1.5rem auto;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            transform: translateZ(20px); /* 3D pop effect */
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        /* The Notch */
-        .phone-mockup::before {
+        .social-btn:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+            border-color: var(--primary);
+        }
+
+        /* --- Skills Section --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(76, 201, 240, 0.3);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            color: #fff;
+            transition: all 0.3s ease;
+            cursor: default;
+            backdrop-filter: blur(5px);
+        }
+
+        .skill-tag:hover {
+            background: rgba(76, 201, 240, 0.2);
+            border-color: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
+        }
+
+        .skill-category {
+            width: 100%;
+            text-align: center;
+            color: var(--accent);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Timeline (Experience & Education) --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
             content: '';
             position: absolute;
+            width: 2px;
+            background: var(--primary);
             top: 0;
+            bottom: 0;
             left: 50%;
-            transform: translateX(-50%);
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
             width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
             height: 20px;
-            background: #333;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            z-index: 5;
+            right: -14px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px var(--accent);
         }
 
-        /* User Image Area */
-        .phone-screen-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures image fills the screen */
-            display: block;
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -14px; }
+
+        .timeline-content {
+            padding: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
         }
 
-        /* --- Card Content --- */
-        .card-content {
-            transform: translateZ(30px); /* Text floats above card */
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.2);
         }
 
-        .card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .timeline-date {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
         }
 
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
+        .timeline-content h3 { margin-bottom: 5px; font-size: 1.4rem; }
+        .timeline-content h4 { color: var(--text-muted); margin-bottom: 15px; font-weight: 400; }
+        .timeline-content p { line-height: 1.5; font-size: 0.95rem; color: #ddd; }
+
+        /* --- Projects Grid (Original Styles) --- */
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
@@ -174,77 +261,108 @@
             border-radius: 24px;
             padding: 2.5rem 1.5rem;
             text-align: center;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bouncy zoom */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-
-
-        /* THE ZOOM EFFECT */
         .card:hover {
-            transform: scale(1.05); /* Zooms the card up by 5% */
+            transform: scale(1.05) translateY(-10px);
             border-color: var(--accent);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(76, 201, 240, 0.2);
         }
 
+        .phone-mockup {
+            width: 200px; height: 400px;
+            background: #000;
+            border-radius: 30px;
+            border: 8px solid #333;
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .phone-mockup::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 50%; height: 20px; background: #333; border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px; z-index: 5;
+        }
+
+        .phone-screen-img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
         .price-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 1rem;
+            display: inline-block; background: rgba(255,255,255,0.1); padding: 0.2rem 0.8rem;
+            border-radius: 20px; color: var(--accent); font-weight: bold; margin-bottom: 1rem;
         }
 
-        /* --- Buttons --- */
         .view-btn {
-            display: inline-block;
-            width: 100%;
-            padding: 12px;
+            display: inline-block; width: 100%; padding: 12px; margin-top: 15px;
             background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
+            color: white; text-decoration: none; border-radius: 8px; font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
         }
 
-        .view-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(76, 201, 240, 0.6);
-        }
+        .view-btn:hover { box-shadow: 0 8px 25px rgba(76, 201, 240, 0.6); }
+
+        .view-all-container{
+    text-align:center;
+    margin-top:40px;
+}
+
+.view-all-btn{
+    display:inline-block;
+    padding:18px 182px;
+    font-size:1.1rem;
+    font-weight:600;
+    text-decoration:none;
+    color:white;
+    border-radius:30px;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    transition:all 0.3s ease;
+}
+
+.view-all-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(76,201,240,0.6);
+}
 
         /* --- Footer --- */
         footer {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--glass-border);
-            margin-top: 2rem;
+            text-align: center; padding: 3rem; color: var(--text-muted);
+            border-top: 1px solid var(--glass-border); margin-top: 2rem;
+            background: rgba(0,0,0,0.5);
+        }
+
+        /* --- Scroll Reveal Animation Classes --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- Animations --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Responsive Tweaks */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .container { padding: 1rem; }
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .right { left: 0; }
         }
-        
-        html {
-    scroll-behavior: smooth;
-}
     </style>
 </head>
 <body>
@@ -252,104 +370,174 @@
     <canvas id="canvas-container"></canvas>
 
     <header>
-        <h1>iOS Craft Studio</h1>
-        <p class="subtitle">Premium SwiftUI Templates & Source Code. <br>Beautifully designed, ready to launch.</p>
+        <h1>Hey, I'm Om</h1>
+        <h2>iOS Developer</h2>
+        
+        <p class="subtitle">
+Passionate iOS Developer experienced in building modern mobile applications using 
+<b>Swift, SwiftUI, and UIKit</b>. I focus on writing clean code, improving app performance, 
+and creating smooth user experiences.
+</p>
+
+        <div class="social-links">
+            <a href="mailto:ommakode2@gmail.com" class="social-btn"><i class="fas fa-envelope"></i> Email</a>
+            <a href="tel:+919767266805" class="social-btn"><i class="fas fa-phone"></i> +91 9767266805</a>
+            <a href="https://github.com/om-makode" target="_blank" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
     </header>
 
-    <div class="container">
-
-        <div class="card-wrap">
-            <div class="card">
-                <div class="phone-mockup">
-                    <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
-                </div>
-                
-                <div class="card-content">
-                    <div class="price-tag">$29.00</div>
-                    <h2>Fitness Tracker UI</h2>
-                    <p>A complete SwiftUI kit for health apps. Includes charts, profile views, and dark mode support.</p>
-                    <a href="https://payhip.com/YOUR_LINK_HERE" class="view-btn">View</a>
-                </div>
-            </div>
+    <section id="skills" class="reveal">
+        <h2 class="section-title">Technical Skills</h2>
+        
+        <div class="skill-category">Programming Languages</div>
+        <div class="skills-container">
+            <span class="skill-tag">Swift</span>
+            <span class="skill-tag">Core & Advanced JAVA</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
         </div>
 
-        <div class="card-wrap">
-            <div class="card">
-                <div class="phone-mockup">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
-                </div>
-                <div class="card-content">
-                    <div class="price-tag">$45.00</div>
-                    <h2>E-Commerce Pro</h2>
-                    <p>Full-featured shopping app template with cart logic, payment screens, and product grids.</p>
-                    <a href="#" class="view-btn">View</a>
-                </div>
-            </div>
+        <div class="skill-category">Frameworks & Libraries</div>
+        <div class="skills-container">
+            <span class="skill-tag">UIKit</span>
+            <span class="skill-tag">SwiftUI</span>
+            <span class="skill-tag">Core Data</span>
+            <span class="skill-tag">UserDefaults</span>
+            <span class="skill-tag">SQLite</span>
+            <span class="skill-tag">RESTful APIs</span>
+            <span class="skill-tag">JSON</span>
+            <span class="skill-tag">VIPER Architecture</span>
         </div>
 
-        <div class="card-wrap">
-            <div class="card">
-                <div class="phone-mockup">
-                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
-                </div>
-                <div class="card-content">
-                    <div class="price-tag">$19.00</div>
-                    <h2>Social Feed Kit</h2>
-                    <p>Instagram-style feed layout with stories, post interactions, and comment sections.</p>
-                    <a href="#" class="view-btn">View</a>
+        <div class="skill-category">Tools & IDEs</div>
+        <div class="skills-container">
+            <span class="skill-tag">Xcode</span>
+            <span class="skill-tag">Git & GitHub</span>
+            <span class="skill-tag">GitLab</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Android Studio</span>
+        </div>
+    </section>
+
+    <section id="experience" class="reveal">
+        <h2 class="section-title">Experience & Internships</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Oct 2025 - Present</span>
+                    <h3>iOS Developer Apprentice</h3>
+                    <h4>Next Education India Pvt. Ltd. | Hyderabad, TS</h4>
+                    <p>Contributing to the "Next Learning Platform" project in a product-based EdTech environment. Responsibilities include fixing bugs, updating features, and working on enhancements to improve app stability and performance.</p>
                 </div>
             </div>
-        </div>
 
-        <div class="card-wrap" id="fitness-card">
-            <div class="card">
-                <div class="phone-mockup">
-                    <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1000&auto=format&fit=crop" alt="App Screen" class="phone-screen-img">
-                </div>
-                
-                <div class="card-content">
-                    <div class="price-tag">$29.00</div>
-                    <h2>Fitness Tracker UI</h2>
-                    <p>A complete SwiftUI kit for health apps. Includes charts, profile views, and dark mode support.</p>
-                    <a href="./details.html" class="view-btn">View</a>
+            <div class="timeline-item right reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Jul 2025 - Oct 2025</span>
+                    <h3>iOS Developer Intern</h3>
+                    <h4>Next Education India Pvt. Ltd. | Hyderabad, TS</h4>
+                    <p>Completed structured training covering Swift, UIKit, and SwiftUI. Gained practical exposure to product architecture, features, and workflows while contributing to real-world development practices.</p>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+           
+            <div class="card reveal">
+                <div class="phone-mockup">
+                    <img src="./Assets/img2.png" alt="App Screen" class="phone-screen-img" onerror="this.src='https://via.placeholder.com/200x400/1a237e/ffffff?text=GitHub+Finder'">
+                </div>
+                <div class="card-content">
+                    <div class="price-tag">Swift</div>
+                    <h2>GitHub Finder</h2>
+                    <p>Search for GitHub profiles and explore their public information instantly through REST APIs.</p>
+                    <a href="./githubFinder_details.html" class="view-btn">View Project</a>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <div class="phone-mockup">
+                    <img src="./Assets/img4.png" alt="App Screen" class="phone-screen-img" onerror="this.src='https://via.placeholder.com/200x400/1a237e/ffffff?text=GitHub+Finder'">
+                </div>
+                <div class="card-content">
+                    <div class="price-tag">Swift</div>
+                    <h2>Custom Header</h2>
+                    <p>Custom Header demonstrates a dynamic header section with an auto-scrolling TabView, gesture interactions, and animated UI components.</p>
+                    <a href="./githubFinder_details.html" class="view-btn">View Project</a>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <div class="phone-mockup">
+                    <img src="./Assets/img5.png" alt="App Screen" class="phone-screen-img" onerror="this.src='https://via.placeholder.com/200x400/050510/4cc9f0?text=VIPER+App'">
+                </div>
+                <div class="card-content">
+                    <div class="price-tag">Swift</div>
+                    <h2>VIPER Architecture</h2>
+                    <p>Simulates a robust authentication and dashboard system strictly adhering to VIPER architecture principles.</p>
+                    <a href="./viper_details.html" class="view-btn">View Project</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="view-all-container" id="projects">
+    <a href="./allProjectsScreen.html" class="view-all-btn">
+        View All Projects <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+    </section>
+
+
+    <section id="education" class="reveal">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Year of Passing: 2025</span>
+                    <h3>Bachelor of Engineering (IT)</h3>
+                    <h4>Sipna College Of Engineering and Technology</h4>
+                    <p>CGPA: 8.45</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Year of Passing: 2021</span>
+                    <h3>HSC (12th Grade)</h3>
+                    <h4>Shri Bhausaheb Pote Jr. College</h4>
+                    <p>Percentage: 87.5%</p>
+                </div>
+            </div>
+
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Year of Passing: 2019</span>
+                    <h3>SSC (10th Grade)</h3>
+                    <h4>Shri Bhausaheb Pote Vidyalaya</h4>
+                    <p>Percentage: 79.6%</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <footer>
-        <p>&copy; 2026 Coder023. All rights reserved.</p>
+        <p>&copy; 2026 Om Kashinath Makode. Designed with <span style="color:var(--accent)">♥</span> & Code.</p>
     </footer>
 
     <script>
-        // // --- 1. 3D TILT EFFECT SCRIPT ---
-        // const cards = document.querySelectorAll('.card');
-
-        // cards.forEach(card => {
-        //     card.addEventListener('mousemove', (e) => {
-        //         const rect = card.getBoundingClientRect();
-        //         const x = e.clientX - rect.left;
-        //         const y = e.clientY - rect.top;
-                
-        //         const centerX = rect.width / 2;
-        //         const centerY = rect.height / 2;
-                
-        //         // const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
-        //         // const rotateY = ((x - centerX) / centerX) * 10;
-
-        //         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        //     });
-
-        //     card.addEventListener('mouseleave', () => {
-        //         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        //     });
-        // });
-
-        // --- 2. DYNAMIC PARTICLE BACKGROUND SCRIPT ---
+        // --- 1. DYNAMIC PARTICLE BACKGROUND SCRIPT (Kept from original) ---
         const canvas = document.getElementById('canvas-container');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
         let particles = [];
 
@@ -367,17 +555,14 @@
                 this.size = Math.random() * 2;
                 this.alpha = Math.random() * 0.5 + 0.1;
             }
-
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-
                 if (this.x < 0) this.x = width;
                 if (this.x > width) this.x = 0;
                 if (this.y < 0) this.y = height;
                 if (this.y > height) this.y = 0;
             }
-
             draw() {
                 ctx.fillStyle = `rgba(76, 201, 240, ${this.alpha})`;
                 ctx.beginPath();
@@ -388,49 +573,47 @@
 
         function initParticles() {
             particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push(new Particle());
-            }
+            for (let i = 0; i < 80; i++) { particles.push(new Particle()); }
         }
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
             
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            // Draw connections
             particles.forEach((p1, i) => {
                 for (let j = i + 1; j < particles.length; j++) {
                     const p2 = particles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
+                    const dx = p1.x - p2.x; const dy = p1.y - p2.y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
-
                     if (dist < 100) {
                         ctx.strokeStyle = `rgba(67, 97, 238, ${1 - dist/100})`;
                         ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
                     }
                 }
             });
-
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', () => {
-            resize();
-            initParticles();
-        });
+        window.addEventListener('resize', () => { resize(); initParticles(); });
+        resize(); initParticles(); animate();
 
-        resize();
-        initParticles();
-        animate();
+        // --- 2. SCROLL REVEAL ANIMATIONS (New Addition) ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // when to trigger
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
     </script>
 </body>
 </html>
